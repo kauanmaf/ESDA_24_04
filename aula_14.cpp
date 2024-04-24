@@ -92,12 +92,12 @@ int main()
     cout << "===============" << endl;
     // Testando a função deleteNodebyValue 
 
-    // deleteNodebyValue(&head1, 7);
-    // displayList(head1);
-    // deleteNodebyValue(&head1, 7);
-    // displayList(head1);
-    // deleteNodebyValue(&head1, 7);
-    // displayList(head1);
+    deleteNodebyValue(&head1, 7);
+    displayList(head1);
+    deleteNodebyValue(&head1, 7);
+    displayList(head1);
+    deleteNodebyValue(&head1, 7);
+    displayList(head1);
 
     return 0;
 }
@@ -108,7 +108,7 @@ Node* createNode(int iPayload){
     temp -> ptrNext = nullptr;
     temp -> ptrPrev = nullptr;
     return temp;
-};
+}
 
 void displayList(Node* node)
 {
@@ -134,7 +134,7 @@ void displayList(Node* node)
     }
     cout << " " << endl;
     return;
-};
+}
 
 void insertFront(Node** head , int iPayload ){
     Node* newNode = createNode(iPayload);
@@ -158,7 +158,7 @@ void insertFront(Node** head , int iPayload ){
     }
 
 
-};
+}
 
 void insertEnd(Node** head, int iPayload){
     Node* newNode = createNode(iPayload);
@@ -185,13 +185,11 @@ void insertEnd(Node** head, int iPayload){
     newNode -> ptrPrev = temp; // newNode aponta para o fim da lista
     temp -> ptrNext = newNode; // Antigo último elemento aponto para o ultimo nó
     return;
-};
+}
 
 // Exercício 1. Elaborar a função void método insertBefore(Node*, int);
 // Exercício 2. Elaborar a função void deleteNodebyValue(Node**, int);
 // Exercício 3. Elaborar a função Node* searchNodebyValue(Node**, int);
-
-
 
 
 void insertAfter(Node* ptrLocation, int iPayload)
@@ -219,7 +217,7 @@ void insertAfter(Node* ptrLocation, int iPayload)
 
         }
     }
-};
+}
 
 void deleteNode (Node** head, Node* ptrDelete)
 {
@@ -244,7 +242,7 @@ void deleteNode (Node** head, Node* ptrDelete)
     if (ptrDelete->ptrPrev != nullptr) ptrDelete -> ptrPrev -> ptrNext = ptrDelete -> ptrNext;
 
     free(ptrDelete);
-};
+}
 
 void insertBefore(Node** node, int iPayload)
 {
@@ -296,5 +294,11 @@ Node* searchNodebyValue(Node** head, int iValue){
     // Se sairmos do while significa que não encontramos o valor
     cout << "Valor nao encontrado" << endl;
     return nullptr; 
+}
 
-};
+void deleteNodebyValue(Node** head, int iDeleteValue)
+{
+    Node* nodeToBeDeleted = searchNodebyValue(head, iDeleteValue);
+    deleteNode(head, nodeToBeDeleted);
+    return;
+}
