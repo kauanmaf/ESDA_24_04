@@ -31,13 +31,13 @@ int main()
     displayList(head);
     cout << "===============" << endl;
     insertEnd(&head, 0);
-    insertEnd(&head, 1);
-    insertEnd(&head, 3);
-    insertEnd(&head, 7);
+    insertEnd(&head, 2);
+    insertEnd(&head, 4);
+    insertEnd(&head, 6);
     // Testando se a inserção ao fim 
     displayList(head);
-    insertFront(&head, 10);
-    insertFront(&head, 15);
+    insertFront(&head, 8);
+    insertFront(&head, 8);
     // Testando a inserção ao começo
     displayList(head);
     cout << "===============" << endl;
@@ -58,16 +58,23 @@ int main()
     displayList(head);
 
     cout << "===============" << endl;
-    // Testando a inserção antes 
-    // Testando a inserção depois de um valor 
 
-    // Testando a inserção depois do primeiro
+    Node* valor_8 = searchNodebyValue(&head, 8);
+    cout << "Elemento " << valor_8 -> iPayload << " na localizacao " << valor_8  << endl;
+
+    cout << "===============" << endl;
+
+    // Testando a inserção antes do primeiro
+    cout << head << endl;
     insertBefore(head, 7);
+    cout << head << endl;
+    displayList(head);
 
-    // Testando depois de algum qualquer
+    // Testando antes de algum qualquer
     insertBefore(head->ptrNext, 7);
+    displayList(head);
 
-    // Testando a insercção depois do ultimo
+    // Testando a insercção antes do ultimo
     Node* ptrCurrent2 = head;
     while (ptrCurrent2->ptrNext != nullptr) ptrCurrent2 = ptrCurrent2 -> ptrNext;
     insertBefore (ptrCurrent2, 7);
@@ -76,9 +83,11 @@ int main()
 
     cout << "===============" << endl;
     // Testando o deleteNode;
-
     deleteNode (&head, head);
-    
+    displayList(head);
+
+    cout << "===============" << endl;
+
 
     return 0;
 }
@@ -230,10 +239,12 @@ void insertBefore(Node* node, int iPayload)
     if (node == nullptr)
     {
         cout << "Nó não pode ser inserido." << endl;
+        return;
     }
     else if (node->ptrPrev == nullptr)
     {
-        insertFront(&(node->ptrPrev), iPayload);
+        insertFront(&(node), iPayload);
+        return;
     }
     else
     {
@@ -242,13 +253,14 @@ void insertBefore(Node* node, int iPayload)
         newNode->ptrPrev = node->ptrPrev;
         node->ptrPrev = newNode;
         newNode->ptrPrev->ptrNext = newNode;
+        return;
     }
 }
 
 Node* searchNodebyValue(Node** head, int iValue){
-    if ((*head) == nullptr || iValue == NULL)
+    if ((*head) == nullptr)
     {
-        cout << "Nao e possivel encontrar o no. ponteiro nulo ou valor nulo" << endl;
+        cout << "Nao e possivel encontrar o no. ponteiro nulo" << endl;
         return nullptr;
     }
     // Setamos um ponteiro como 
