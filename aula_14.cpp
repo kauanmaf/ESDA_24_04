@@ -210,3 +210,22 @@ void deleteNode (Node** head, Node* ptrDelete)
     free(ptrDelete);
 };
 
+void insertBefore(Node* node, int iPayload)
+{
+    if (node == nullptr)
+    {
+        cout << "Nó não pode ser inserido." << endl;
+    }
+    else if (node -> ptrPrev == nullptr)
+    {
+        insertFront(node*, iPayload);
+    }
+    else
+    {
+        Node* newNode = createNode(iPayload);
+        newNode -> ptrNext = node;
+        newNode -> ptrPrev = node -> ptrPrev;
+        node -> ptrPrev = newNode;
+        node -> ptrPrev -> ptrNext = newNode;
+    }
+}
