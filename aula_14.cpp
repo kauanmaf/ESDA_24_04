@@ -44,25 +44,39 @@ int main()
     // Testando a inserção depois de um valor 
 
     // Testando a inserção depois do primeiro
-    insertAfter(head, 15);
+    insertAfter(head, 5);
 
     // Testando depois de algum qualquer
-    insertAfter(head->ptrNext, 20);
+    insertAfter(head->ptrNext, 5);
 
     // Testando a insercção depois do ultimo
-    Node* ptrCurrent = head;
-    while (ptrCurrent->ptrNext != nullptr) ptrCurrent = ptrCurrent -> ptrNext;
-    insertAfter (ptrCurrent, 5);
+    Node* ptrCurrent1 = head;
+    while (ptrCurrent1->ptrNext != nullptr) ptrCurrent1 = ptrCurrent1 -> ptrNext;
+    insertAfter (ptrCurrent1, 5);
     
     displayList(head);
 
     cout << "===============" << endl;
     // Testando a inserção antes 
+    // Testando a inserção depois de um valor 
+
+    // Testando a inserção depois do primeiro
+    insertBefore(head, 7);
+
+    // Testando depois de algum qualquer
+    insertBefore(head->ptrNext, 7);
+
+    // Testando a insercção depois do ultimo
+    Node* ptrCurrent2 = head;
+    while (ptrCurrent2->ptrNext != nullptr) ptrCurrent2 = ptrCurrent2 -> ptrNext;
+    insertBefore (ptrCurrent2, 7);
     
+    displayList(head);
+
     cout << "===============" << endl;
     // Testando o deleteNode;
 
-    deleteNode (&head, head)
+    deleteNode (&head, head);
     
 
     return 0;
@@ -216,16 +230,16 @@ void insertBefore(Node* node, int iPayload)
     {
         cout << "Nó não pode ser inserido." << endl;
     }
-    else if (node -> ptrPrev == nullptr)
+    else if (node->ptrPrev == nullptr)
     {
-        insertFront(node*, iPayload);
+        insertFront(&node, iPayload);
     }
     else
     {
         Node* newNode = createNode(iPayload);
-        newNode -> ptrNext = node;
-        newNode -> ptrPrev = node -> ptrPrev;
-        node -> ptrPrev = newNode;
-        node -> ptrPrev -> ptrNext = newNode;
+        newNode->ptrNext = node;
+        newNode->ptrPrev = node->ptrPrev;
+        node->ptrPrev = newNode;
+        newNode->ptrPrev->ptrNext = newNode;
     }
 }
