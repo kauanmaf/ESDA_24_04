@@ -23,6 +23,7 @@ void insertAfter(Node*, int);
 void insertBefore(Node*, int);
 void deleteNode (Node**, Node*);
 void displayList(Node*);
+Node* searchNodebyValue(Node**, int);
 
 int main()
 {
@@ -232,7 +233,7 @@ void insertBefore(Node* node, int iPayload)
     }
     else if (node->ptrPrev == nullptr)
     {
-        insertFront(&node, iPayload);
+        insertFront(&(node->ptrPrev), iPayload);
     }
     else
     {
@@ -243,3 +244,32 @@ void insertBefore(Node* node, int iPayload)
         newNode->ptrPrev->ptrNext = newNode;
     }
 }
+
+Node* searchNodebyValue(Node** head, int iValue){
+    if ((*head) == nullptr || iValue == NULL)
+    {
+        cout << "Nao e possivel encontrar o no. ponteiro nulo ou valor nulo" << endl;
+        return nullptr;
+    }
+    // Setamos um ponteiro como 
+    Node* ptrCurrent = (*head);
+
+    // Enquanto não for nulo (chegarmos ao final)
+    while(ptrCurrent != nullptr)
+    {
+        // Checamos se o valor do payload é igual ao valor que estamos procurando 
+        if (ptrCurrent -> iPayload == iValue)
+        {
+            // Retornamos o primeiro current que achamos
+            return ptrCurrent;
+        }
+
+        // Setamos o current como o próximo
+        ptrCurrent = ptrCurrent -> ptrNext;
+    }
+
+    // Se sairmos do while significa que não encontramos o valor
+    cout << "Valor nao encontrado" << endl;
+    return nullptr; 
+
+};
