@@ -96,7 +96,7 @@ int main()
     displayList(head1);
     deleteNodebyValue(&head1, 7);
     displayList(head1);
-    deleteNodebyValue(&head1, 7);
+    deleteNodebyValue(&head1, 5);
     displayList(head1);
 
     return 0;
