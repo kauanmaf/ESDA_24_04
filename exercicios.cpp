@@ -156,8 +156,6 @@ void insertFront(Node** head , int iPayload ){
         // Basta setar
         (*head) = newNode; 
     }
-
-
 }
 
 void insertEnd(Node** head, int iPayload){
