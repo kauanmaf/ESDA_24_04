@@ -33,11 +33,37 @@ int main()
     insertEnd(&head, 1);
     insertEnd(&head, 3);
     insertEnd(&head, 7);
-    insertEnd(&head, 10);
-    insertEnd(&head, 15);
-    displayList (head);
+    // Testando se a inserção ao fim 
+    displayList(head);
+    insertFront(&head, 10);
+    insertFront(&head, 15);
+    // Testando a inserção ao começo
+    displayList(head);
     cout << "===============" << endl;
 
+    // Testando a inserção depois de um valor 
+
+    // Testando a inserção depois do primeiro
+    insertAfter(head, 15);
+
+    // Testando depois de algum qualquer
+    insertAfter(head->ptrNext, 20);
+
+    // Testando a insercção depois do ultimo
+    Node* ptrCurrent = head;
+    while (ptrCurrent->ptrNext != nullptr) ptrCurrent = ptrCurrent -> ptrNext;
+    insertAfter (ptrCurrent, 5);
+    
+    displayList(head);
+
+    cout << "===============" << endl;
+    // Testando a inserção antes 
+    
+    cout << "===============" << endl;
+    // Testando o deleteNode;
+
+    deleteNode (&head, head)
+    
 
     return 0;
 }
@@ -98,7 +124,7 @@ void insertFront(Node** head , int iPayload ){
     }
 
 
-}; // Todo;
+};
 
 void insertEnd(Node** head, int iPayload){
     Node* newNode = createNode(iPayload);
