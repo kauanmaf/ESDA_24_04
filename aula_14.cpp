@@ -27,67 +27,70 @@ Node* searchNodebyValue(Node**, int);
 
 int main()
 {
-    Node* head = nullptr;
-    displayList(head);
+    Node* head1 = nullptr;
+    displayList(head1);
     cout << "===============" << endl;
-    insertEnd(&head, 0);
-    insertEnd(&head, 2);
-    insertEnd(&head, 4);
-    insertEnd(&head, 6);
+    insertEnd(&head1, 0);
+    insertEnd(&head1, 2);
+    insertEnd(&head1, 4);
+    insertEnd(&head1, 6);
     // Testando se a inserção ao fim 
-    displayList(head);
-    insertFront(&head, 8);
-    insertFront(&head, 8);
+    displayList(head1);
+    insertFront(&head1, 8);
+    insertFront(&head1, 8);
     // Testando a inserção ao começo
-    displayList(head);
+    displayList(head1);
     cout << "===============" << endl;
 
     // Testando a inserção depois de um valor 
 
     // Testando a inserção depois do primeiro
-    insertAfter(head, 5);
+    insertAfter(head1, 5);
 
     // Testando depois de algum qualquer
-    insertAfter(head->ptrNext, 5);
+    insertAfter(head1->ptrNext, 5);
 
     // Testando a insercção depois do ultimo
-    Node* ptrCurrent1 = head;
+    Node* ptrCurrent1 = head1;
     while (ptrCurrent1->ptrNext != nullptr) ptrCurrent1 = ptrCurrent1 -> ptrNext;
     insertAfter (ptrCurrent1, 5);
     
-    displayList(head);
-
-    cout << "===============" << endl;
-
-    Node* valor_8 = searchNodebyValue(&head, 8);
-    cout << "Elemento " << valor_8 -> iPayload << " na localizacao " << valor_8  << endl;
+    displayList(head1);
 
     cout << "===============" << endl;
 
     // Testando a inserção antes do primeiro
-    cout << head << endl;
-    insertBefore(head, 7);
-    cout << head << endl;
-    displayList(head);
+    // cout << head1 << endl;
+    // insertBefore(head1, 7);
+    // cout << head1 << endl;
+
+    displayList(head1);
 
     // Testando antes de algum qualquer
-    insertBefore(head->ptrNext, 7);
-    displayList(head);
+    insertBefore(head1->ptrNext, 7);
+    displayList(head1);
 
     // Testando a insercção antes do ultimo
-    Node* ptrCurrent2 = head;
+    Node* ptrCurrent2 = head1;
     while (ptrCurrent2->ptrNext != nullptr) ptrCurrent2 = ptrCurrent2 -> ptrNext;
     insertBefore (ptrCurrent2, 7);
     
-    displayList(head);
+    displayList(head1);
 
     cout << "===============" << endl;
     // Testando o deleteNode;
-    deleteNode (&head, head);
-    displayList(head);
+    cout << head1 << endl;
+    deleteNode (&head1, head1);
+    cout << head1 << endl;
+    
+    displayList(head1);
 
     cout << "===============" << endl;
 
+    Node* valor_8 = searchNodebyValue(&head1, 8);
+    cout << "Elemento " << valor_8 -> iPayload << " na localizacao " << valor_8  << endl;
+
+    cout << "===============" << endl;
 
     return 0;
 }
@@ -109,6 +112,7 @@ void displayList(Node* node)
     }
     // Se não recebemos o head, não printamos
     if (node -> ptrPrev != nullptr){
+        cout << node-> iPayload << endl;
         cout << "Meio ou fim da lista : não é possível realizar o display list" << endl;
         return;
     }
@@ -127,7 +131,7 @@ void displayList(Node* node)
 
 void insertFront(Node** head , int iPayload ){
     Node* newNode = createNode(iPayload);
-    // newNode->ptrPrev = nullptr;
+    newNode->ptrPrev = nullptr;
 
     // Quando tivermos algo na lista
     if (*head != nullptr)
@@ -223,13 +227,15 @@ void deleteNode (Node** head, Node* ptrDelete)
     if ((*head) == ptrDelete)
     {
         (*head) = ptrDelete-> ptrNext;
+        // Precisamos definir o anterior como nullptr
+        (*head)->ptrPrev = nullptr; 
     }
 
     // Se o ptrDelete não é o ultimo nó
     if (ptrDelete -> ptrNext != nullptr) ptrDelete -> ptrNext -> ptrPrev = ptrDelete -> ptrPrev;
 
     // Se o ptrDelete não é o primeiro nó
-    if (ptrDelete -> ptrPrev != nullptr) ptrDelete -> ptrNext -> ptrNext = ptrDelete -> ptrNext;
+    if (ptrDelete->ptrPrev != nullptr) ptrDelete -> ptrPrev -> ptrNext = ptrDelete -> ptrNext;
 
     free(ptrDelete);
 };
@@ -243,12 +249,14 @@ void insertBefore(Node* node, int iPayload)
     }
     else if (node->ptrPrev == nullptr)
     {
-        insertFront(&(node), iPayload);
+        insertFront(&node, iPayload);
         return;
     }
     else
     {
+        // Criando o nó
         Node* newNode = createNode(iPayload);
+
         newNode->ptrNext = node;
         newNode->ptrPrev = node->ptrPrev;
         node->ptrPrev = newNode;
